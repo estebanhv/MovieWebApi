@@ -4,7 +4,7 @@ using MovieWebApi.service.interfaces;
 
 namespace MovieWebApi.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Movie")]
     [ApiController]
     public class MovieController : ControllerBase
     {

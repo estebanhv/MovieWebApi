@@ -11,6 +11,8 @@ namespace MovieWebApi.Persistence.db
         }
 
         public DbSet<MovieEntity> Movies { get; set; }
-        // Aquí pondrás más entidades como DoctorEntity, PatientEntity, etc.
+        public DbSet<UserEntity> Users { get; set; }
+
+
     }
 }
