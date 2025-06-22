@@ -1,4 +1,23 @@
+using Microsoft.EntityFrameworkCore; // Importante
+using MovieWebApi.Persistence.db;
+using MovieWebApi.Persistence.repository;
+using MovieWebApi.Persistence.repository.interfaces;
+using MovieWebApi.service.implementation;
+using MovieWebApi.service.interfaces;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+
+//Add instancias to the container.
+// Add instancias to the container.
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IMovieService, MovieServiceServiceImpl>(); // ?? ESTA LÍNEA ES CLAVE
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Add services to the container.
 
