@@ -4,6 +4,8 @@ namespace MovieWebApi.service.interfaces
 {
     public interface IMovieService
     {
+   
+        Task<IEnumerable<MovieDTO>> SearchMoviesAsync(string title);
         Task<List<MovieDTO>> FindAllAsync();
         Task<MovieDTO?> FindByIdAsync(long id);
         Task<MovieDTO> CreateMovieAsync(MovieDTO movieDTO);

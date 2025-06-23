@@ -15,6 +15,17 @@ namespace MovieWebApi.Presentation.Controllers
             _movieService = movieService;
         }
 
+
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchMovies([FromQuery] string title)
+        {
+            var result = await _movieService.SearchMoviesAsync(title);
+            return Ok(result);
+        }
+
+
+
         // GET: api/movie
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MovieDTO>>> GetAll()
