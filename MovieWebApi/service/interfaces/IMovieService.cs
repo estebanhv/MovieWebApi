@@ -7,10 +7,10 @@ namespace MovieWebApi.service.interfaces
    
         Task<IEnumerable<MovieDTO>> SearchMoviesAsync(string title);
         Task<List<MovieDTO>> FindAllAsync();
-        Task<MovieDTO?> FindByIdAsync(long id);
+        Task<MovieDTO?> FindByIdAsync(String id);
         Task<MovieDTO> CreateMovieAsync(MovieDTO movieDTO);
-        Task<MovieDTO?> UpdateMovieAsync(MovieDTO movieDTO, long id);
-        Task<MovieDTO?> DeleteMovieAsync(long id);
+        Task<MovieDTO?> UpdateMovieAsync(MovieDTO movieDTO, string id);
+        Task<MovieDTO?> DeleteMovieAsync(string id);
 
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore; // Importante
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore.Design;
 using MovieWebApi.Persistence.db;
 using MovieWebApi.Persistence.repository;
 using MovieWebApi.Persistence.repository.interfaces;
@@ -48,6 +49,10 @@ builder.Services.AddScoped<IMovieService, MovieServiceServiceImpl>(); // ?? ESTA
 
 builder.Services.AddScoped<IUserService, UserServiceImpl>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IFavoriteMovieService, FavoriteMovieServiceImpl>();
+builder.Services.AddScoped<IFavoriteMovieRepository, FavoriteMovieRepository>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

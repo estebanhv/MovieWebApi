@@ -1,25 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MovieWebApi.Persistence.entities
+public class MovieEntity
 {
-    [Table("movies")] // <-- esto define el nombre de la tabla
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; } // ID interno para tu sistema
 
-    public class MovieEntity
-    {
-        [Column("id")]
+    [Required]
+    [MaxLength(20)]
+    public string ImdbId { get; set; } 
 
-        public int Id { get; set; }
+    public string Title { get; set; }
+    public string? Year { get; set; }
+    public string? Poster { get; set; }
 
-        [Column("title")]
-
-
-        public string Title { get; set; } = string.Empty;
-        [Column("year")]
-
-        public string? Year { get; set; } = string.Empty;
-
-        [Column("poster")]
-
-        public string? Poster { get; set; } = string.Empty;
-    }
+    public ICollection<FavoriteMovieEntity> FavoriteMovies { get; set; }
 }

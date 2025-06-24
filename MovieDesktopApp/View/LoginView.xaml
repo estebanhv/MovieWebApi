@@ -85,8 +85,8 @@
                         Margin="0,35,0,0"
                         Orientation="Vertical"
                         Width="250">
-                
-                <TextBlock Text="MovieApi"
+
+                <TextBlock Text="🎬MovieApi"
                            Foreground="White"
                            FontSize="40"
                            FontWeight="Medium"
@@ -101,6 +101,13 @@
                            TextWrapping="Wrap"
                            TextAlignment="Center"
                            Margin="0,5,0,10"/>
+
+                <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="14">
+                    <Hyperlink Click="ContinueAsGuest_Click" Foreground="LightBlue">
+                        Continuar sin iniciar sesión
+                    </Hyperlink>
+                </TextBlock>
+
 
                 <TextBlock Text="Username"
                             Foreground="DarkGray"

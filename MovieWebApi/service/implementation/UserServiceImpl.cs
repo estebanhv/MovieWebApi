@@ -37,7 +37,7 @@ namespace MovieWebApi.service.implementation
             return true;
         }
 
-        public async Task<string?> LoginAsync(UserDTO dto)
+        public async Task<LoginResponseDTO?> LoginAsync(UserDTO dto)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
@@ -45,9 +45,9 @@ namespace MovieWebApi.service.implementation
 
             var claims = new[]
             {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email)
-        };
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Email, user.Email)
+    };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -60,8 +60,15 @@ namespace MovieWebApi.service.implementation
                 signingCredentials: creds
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new LoginResponseDTO
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                UserId = user.Id
+            };
         }
+
+
+
 
         public Task<List<UserDTO>> FindAllAsync()
         {

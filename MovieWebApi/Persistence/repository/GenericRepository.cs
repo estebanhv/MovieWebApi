@@ -6,18 +6,17 @@ using MovieWebApi.Persistence.repository.interfaces;
 namespace MovieWebApi.Persistence.repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
-    {// 👇 Aquí defines el DbContext y el DbSet que usarás en todos los métodos
+    {
         protected readonly AppDbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        // 👇 Constructor recibe el contexto e inicializa el DbSet genérico
         public GenericRepository(AppDbContext context)
         {
             _context = context;
-            _dbSet = _context.Set<T>(); // <-- esto hace que funcione con cualquier entidad
+            _dbSet = _context.Set<T>();
         }
 
-        public async Task<T?> GetByIdAsync(long id)
+        public async Task<T?> GetByIdAsync(string id)
         {
             return await _dbSet.FindAsync(id);
         }

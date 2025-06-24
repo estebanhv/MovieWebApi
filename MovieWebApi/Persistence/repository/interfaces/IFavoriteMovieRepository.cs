@@ -2,9 +2,7 @@
 
 namespace MovieWebApi.Persistence.repository.interfaces
 {
-    public interface IMovieRepository : IGenericRepository<MovieEntity>
+    public interface IFavoriteMovieRepository : IGenericRepository<FavoriteMovieEntity>
     {
-        
     }
-   
 }

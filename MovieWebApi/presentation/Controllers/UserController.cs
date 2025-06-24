@@ -7,7 +7,7 @@ namespace MovieWebApi.presentation.Controllers
 {
     [ApiController]
     [Route("api/auth")]
-    public class UserController : ControllerBase // Fix: Inherit from ControllerBase to access Ok() and BadRequest() methods.
+    public class UserController : ControllerBase 
     {
         private readonly IUserService _userService;
 
@@ -28,7 +28,7 @@ namespace MovieWebApi.presentation.Controllers
         public async Task<IActionResult> Login(UserDTO dto)
         {
             var token = await _userService.LoginAsync(dto);
-            return token != null ? Ok(new { token }) : Unauthorized("Credenciales inválidas.");
+            return token != null ? Ok(token) : Unauthorized("Credenciales inválidas.");
         }
     }
 }

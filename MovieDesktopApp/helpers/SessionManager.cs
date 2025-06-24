@@ -13,17 +13,19 @@ namespace MovieDesktopApp.helpers
 
         public static string? Token { get; set; }
         public static string? UserEmail { get; set; }
-        public static int? UserId { get; set; }
+        public static int UserId { get; set; }
         public static string? Rol { get; set; }
 
         // Puedes agregar métodos útiles también
         public static bool IsLoggedIn => !string.IsNullOrEmpty(Token);
 
+
+
         public static void ClearSession()
         {
             Token = null;
             UserEmail = null;
-            UserId = null;
+            UserId = 0;
             Rol = null;
         }
 

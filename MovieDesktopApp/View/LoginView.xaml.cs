@@ -26,13 +26,13 @@ namespace MovieDesktopApp.view
     public partial class LoginView : Window
 
     {
-        private readonly AuthService _authService;
+        private readonly SessionService _authService;
 
 
         public LoginView()
         {
             InitializeComponent();
-            _authService = new AuthService();
+            _authService = new SessionService();
 
 
         }
@@ -74,6 +74,8 @@ namespace MovieDesktopApp.view
                 {
                     SessionManager.Token = result.Token;
                     SessionManager.UserEmail = email;
+                    SessionManager.UserId = result.UserId; // Asegúrate de que LoginResponseDTO tenga UserId
+
                     // SessionManager.UserId = result.UserId; // si lo tienes
 
                     MessageBox.Show("Login correcto.");
@@ -89,17 +91,26 @@ namespace MovieDesktopApp.view
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error de conexión: " + ex.Message);
+                MessageBox.Show("Error de conexión 2323: " + ex.Message);
             }
         }
-    }
 
-    private void Register_Click(object sender, RoutedEventArgs e)
+
+        private void Register_Click(object sender, RoutedEventArgs e)
         {
             var registerWindow = new RegisterView();
             registerWindow.Show();
             this.Close();
         }
 
+    
+
+    private void ContinueAsGuest_Click(object sender, RoutedEventArgs e)
+        {
+            var movieSearchWindow = new SearchMovie();
+            movieSearchWindow.Show();
+            this.Close();
+
+        }
     }
 }

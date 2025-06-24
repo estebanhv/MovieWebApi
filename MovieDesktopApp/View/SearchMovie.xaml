@@ -12,15 +12,15 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
-        >
+        Background="#1e1e2f">
+    <!-- Aquí van tus recursos -->
     <Window.Resources>
-        <!-- Estilo para el placeholder -->
-        <Style TargetType="TextBlock" x:Key="PlaceholderStyle">
-            <Setter Property="Foreground" Value="Gray"/>
-            <Setter Property="Margin" Value="12,0,0,0"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="IsHitTestVisible" Value="False"/>
-        </Style>
+        <DropShadowEffect x:Key="DropShadowEffect"
+                          BlurRadius="8"
+                          ShadowDepth="2"
+                          Direction="270"
+                          Opacity="0.5"
+                          Color="Black"/>
     </Window.Resources>
 
     <Grid Margin="20">
@@ -28,61 +28,124 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <!-- CABECERA -->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,20">
+            <TextBlock Text="🎬 Movie Desktop App"
+                   FontSize="24"
+                   Foreground="LightGray"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   Margin="0,0,20,0"/>
+
+            <TextBlock x:Name="txtLoginLogout"
+               Text="Cerrar sesión"
+               Foreground="LightBlue"
+               VerticalAlignment="Center"
+               FontSize="14"
+               Cursor="Hand"
+               Margin="240,0,0,0"
+               MouseDown="txtLoginLogout_MouseDown"/>
+
+            <Button x:Name="btnMinimize"
+        Content="-"
+        Click="btnMinimize_Click"
+        Width="25"
+        Height="25"
+        Cursor="Hand" Margin="100,0,0,0"
+        >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="MediumPurple" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button x:Name="btnClose"
+                Content="X"
+                Click="btnClose_Click"
+                Width="25"
+                Height="25"
+                Cursor="Hand"
+                DockPanel.Dock="Right" Margin="1,0,25,0" HorizontalAlignment="Right">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Red" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
         
         
 
-        <!-- Búsqueda -->
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-            <Grid Width="500">
-                <TextBox x:Name="SearchBox"
-                         FontSize="18"
-                         Padding="10"
-                         VerticalContentAlignment="Center"
-                         />
-                <TextBlock x:Name="PlaceholderText"
-                           Text="Buscar película..."
-                           Style="{StaticResource PlaceholderStyle}"
-                           Visibility="Visible"/>
-            </Grid>
+        <!-- BÚSQUEDA -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,40,0,10">
+            <TextBox x:Name="SearchBox"
+                 Width="500"
+                 FontSize="18"
+                 Padding="10"
+                 VerticalContentAlignment="Center"
+                 />
             <Button Content="Buscar"
-                    Width="100"
+                Width="100"
+                FontSize="16"
+                Background="#725CAD"
+                Foreground="White"
+                Margin="10,0,0,0"
+                Click="SearchButton_Click"/>
+
+            <Button Content="Favoritos ❤️"
+                    x:Name="btnViewFavs"
                     FontSize="16"
-                    Background="#725CAD"
-                    Foreground="White"
-                    Margin="10,0,0,0"
-                    Click="SearchButton_Click"/>
+                    Background="Violet"
+                    Foreground="Black"
+                    Margin="30,0,0,0"
+                    Click="btnViewFavs_Click"/>
+            
         </StackPanel>
 
-        <!-- Resultados -->
-        <ScrollViewer Grid.Row="1">
-            <ItemsControl x:Name="MovieListPanel">
+        <!-- RESULTADOS -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="MovieListPanel" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True" />
+                        <UniformGrid Columns="3" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="Gray" Padding="10" Margin="10" Width="180" Background="White" CornerRadius="8">
+                        <Border BorderThickness="1"
+                        BorderBrush="Gray"
+                        Padding="10"
+                        Margin="10"
+                        Width="200"
+                        Background="White"
+                        CornerRadius="8">
                             <StackPanel>
                                 <Image Source="{Binding Poster}" Height="200" Stretch="UniformToFill" Margin="0,0,0,10"/>
                                 <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding Year}" Foreground="Gray" FontSize="12"/>
-                                <!-- Botón "❤️" para agregar a favoritos -->
-                                <Button Content="❤️"
-                                    Margin="0,10,0,0"
-                                    Background="Transparent"
-                                    Foreground="Red"
-                                    FontSize="16"
-                                    Cursor="Hand"
-                                    BorderThickness="0"
-                                    Tag="{Binding}" />
+                                <Button Content="{Binding ActionIcon}"
+                                Background="Transparent"
+                                Foreground="Red"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Margin="0,10,0,0"
+                                Click="btnAddFav_Click"
+                                Tag="{Binding}" />
+
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
+
     </Grid>
 </Window>

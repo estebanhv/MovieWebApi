@@ -1,20 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using MovieWebApi.Persistence.entities;
 
-namespace MovieWebApi.Persistence.entities
+public class FavoriteMovieEntity
 {
-    [Table("favorite_movie")]
-    public class FavoriteMovieEntity
-    {
-        [Column("userId")]
-        public string UserId { get; set; }
+    public int UserId { get; set; }
 
-        [Column("movieId")]
-        public string MovieId { get; set; }
+    public string ImdbId { get; set; }
 
-        [Column("addedDate")]
-        public DateTime AddedDate { get; set; } = DateTime.UtcNow; 
+    public DateTime AddedDate { get; set; } = DateTime.UtcNow;
 
-        public UserEntity User { get; set; }
-        public MovieEntity Movie { get; set; }
-    }
+    public UserEntity User { get; set; }
+    public MovieEntity Movie { get; set; }
 }

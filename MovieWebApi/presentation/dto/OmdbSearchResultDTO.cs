@@ -1,8 +1,6 @@
-﻿using MovieWebApi.presentation.dto;
-
-namespace MovieWebApi.Persistence.entities
+﻿namespace MovieWebApi.presentation.dto
 {
-    public class OmdbSearchResult
+    public class OmdbSearchResultDTO
     {
         public List<MovieDTO> Search { get; set; }
         public string TotalResults { get; set; }

@@ -10,5 +10,7 @@ namespace MovieDesktopApp.data.dto
     {
         public string Token { get; set; } // Solo si usas JWT
 
+        public int UserId { get; set; } // ID del usuario, si es necesario
+
     }
 }

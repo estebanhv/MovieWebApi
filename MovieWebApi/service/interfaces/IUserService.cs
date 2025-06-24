@@ -5,7 +5,7 @@ namespace MovieWebApi.service.interfaces
     public interface IUserService
     {
         Task<bool> RegisterAsync(UserDTO userDTO);
-        Task<string> LoginAsync(UserDTO userDTO);
+        Task<LoginResponseDTO> LoginAsync(UserDTO userDTO);
         Task<List<UserDTO>> FindAllAsync();
         Task<UserDTO?> FindByIdAsync(long id);
         Task<UserDTO> CreateUserAsync(UserDTO userDTO);

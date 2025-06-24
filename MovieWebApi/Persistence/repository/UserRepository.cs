@@ -10,6 +10,5 @@ namespace MovieWebApi.Persistence.repository
         {
         }
 
-        // Métodos específicos de MovieEntity, si es necesario
     }
 }
